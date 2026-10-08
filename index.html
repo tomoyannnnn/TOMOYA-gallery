@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Gakuryu ART WORKS | Prototype</title>
+  <style>
+    :root{--bg:#111;--fg:#f7f4ee;--muted:#b8b2a9;--panel:#181818;--accent:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}
+    a{color:inherit;text-decoration:none}button{font:inherit}
+    header{position:fixed;z-index:30;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:18px 26px;background:linear-gradient(180deg,rgba(0,0,0,.82),rgba(0,0,0,0));pointer-events:none}
+    header>*{pointer-events:auto}.brand{font-family:Georgia,serif;font-style:italic;font-size:28px;letter-spacing:.06em}.brand small{display:block;font-family:inherit;font-style:normal;font-size:9px;letter-spacing:.45em;margin-top:3px;color:#ddd}
+    nav{display:flex;gap:22px;font-size:12px;letter-spacing:.12em}nav a{opacity:.82}nav a:hover{opacity:1}
+    .hero{min-height:100svh;display:grid;place-items:center;padding-top:76px;background:#0b0b0b}
+    .gallery-stage{position:relative;width:min(100vw,1600px);aspect-ratio:1.5/1;overflow:hidden;background:#222;box-shadow:0 20px 80px #000}
+    .gallery-stage>img{width:100%;height:100%;display:block;object-fit:cover}
+    .hotspot{position:absolute;border:1.5px solid rgba(255,255,255,0);background:rgba(255,255,255,0);cursor:pointer;border-radius:4px;transition:.2s ease;outline:none}
+    .hotspot::after{content:"タップして作品を見る";position:absolute;left:50%;bottom:8px;transform:translateX(-50%) translateY(8px);white-space:nowrap;background:rgba(0,0,0,.72);color:#fff;padding:6px 9px;border-radius:999px;font-size:10px;letter-spacing:.05em;opacity:0;transition:.2s}
+    .hotspot:hover,.hotspot:focus-visible{border-color:rgba(255,255,255,.8);background:rgba(255,255,255,.05);box-shadow:0 0 0 4px rgba(255,255,255,.08)}
+    .hotspot:hover::after,.hotspot:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
+    .h1{left:17.1%;top:15.5%;width:15.2%;height:43.5%}.h2{left:35.2%;top:32.1%;width:14.2%;height:27.4%}.h3{left:51.1%;top:27.3%;width:24.3%;height:35.7%}.h4{left:75.8%;top:42.3%;width:9.1%;height:22.2%}.h5{left:86.3%;top:42.2%;width:8.5%;height:24.0%}
+    .hint{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);background:rgba(0,0,0,.7);padding:8px 14px;border-radius:999px;font-size:11px;letter-spacing:.08em;backdrop-filter:blur(8px)}
+    .works{padding:72px 20px 90px;max-width:1200px;margin:auto}.works h2{font-family:Georgia,serif;font-weight:400;font-size:36px;margin:0 0 10px}.works p{color:var(--muted);margin:0 0 28px;font-size:14px;line-height:1.8}
+    .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.card{background:var(--panel);border:1px solid #2d2d2d;padding:0;text-align:left;color:inherit;cursor:pointer}.thumb{aspect-ratio:4/5;background:#222;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s}.card:hover img{transform:scale(1.025)}.meta{padding:12px 13px 14px}.meta strong{display:block;font-size:12px;letter-spacing:.16em}.meta span{display:block;color:var(--muted);font-size:11px;margin-top:6px}
+    .modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-inner{position:relative;width:min(1200px,100%);height:min(90svh,900px);display:grid;grid-template-rows:1fr auto;background:#0e0e0e;border:1px solid #2a2a2a;box-shadow:0 30px 100px #000}.image-wrap{min-height:0;display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}.image-wrap img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 8px 40px rgba(0,0,0,.4)}
+    .modal-bar{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px 16px;border-top:1px solid #292929;background:#151515}.modal-title{font-size:12px;letter-spacing:.15em}.modal-note{font-size:11px;color:var(--muted)}.close{position:absolute;right:12px;top:12px;z-index:2;border:1px solid #555;background:rgba(0,0,0,.65);color:#fff;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:22px;line-height:1}
+    .shop-btn{border:1px solid #eee;background:#eee;color:#111;padding:10px 14px;font-size:11px;letter-spacing:.08em;cursor:pointer}
+    .shop-btn[disabled]{opacity:.45;cursor:not-allowed}
+    footer{padding:24px 20px 38px;text-align:center;color:#777;font-size:10px;letter-spacing:.1em}
+    @media (max-width:900px){nav{display:none}.hero{padding-top:0;min-height:auto}.gallery-stage{margin-top:0;width:100%;aspect-ratio:1.5/1}.hint{bottom:10px;font-size:9px}.grid{grid-template-columns:repeat(2,1fr)}.works{padding-top:48px}.brand{font-size:22px}header{padding:14px 16px}.hotspot::after{display:none}}
+    @media (max-width:560px){.gallery-stage{margin-top:60px}.works h2{font-size:30px}.grid{gap:10px}.modal{padding:0}.modal-inner{height:100svh;border:0}.modal-bar{align-items:flex-start;flex-direction:column;padding-right:70px}.shop-btn{width:100%}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">Gakuryu<small>ART WORKS</small></div>
+  <nav><a href="#gallery">GALLERY</a><a href="#works">WORKS</a><a href="#works">SHOP</a></nav>
+</header>
+
+<main>
+  <section class="hero" id="gallery" aria-label="オンライン展示室">
+    <div class="gallery-stage">
+      <img src="assets/gallery.png" alt="オンラインギャラリー展示室" />
+      <button class="hotspot h1" data-work="0" aria-label="WORK 01 を開く"></button>
+      <button class="hotspot h2" data-work="1" aria-label="WORK 02 を開く"></button>
+      <button class="hotspot h3" data-work="2" aria-label="WORK 03 を開く"></button>
+      <button class="hotspot h4" data-work="3" aria-label="WORK 04 を開く"></button>
+      <button class="hotspot h5" data-work="4" aria-label="WORK 05 を開く"></button>
+      <div class="hint">作品をタップすると正面画像が開きます</div>
+    </div>
+  </section>
+
+  <section class="works" id="works">
+    <h2>Selected Works</h2>
+    <p>作品名・制作年・サイズは未入力のため、現在は仮表記です。画像を選ぶと正面画像を拡大表示します。</p>
+    <div class="grid" id="worksGrid"></div>
+  </section>
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="作品詳細">
+  <div class="modal-inner">
+    <button class="close" id="closeBtn" aria-label="閉じる">×</button>
+    <div class="image-wrap"><img id="modalImg" src="" alt="" /></div>
+    <div class="modal-bar">
+      <div><div class="modal-title" id="modalTitle"></div><div class="modal-note">正面画像・拡大表示 / 作品情報は後で追加できます</div></div>
+      <button class="shop-btn" disabled>PRINT SHOP（準備中）</button>
+    </div>
+  </div>
+</div>
+
+<footer>PROTOTYPE / 2026</footer>
+
+<script>
+const works = [
+  {id:'WORK 01', src:'assets/work01.jpeg', alt:'サングラスをかけたペンギンの作品'},
+  {id:'WORK 02', src:'assets/work02.jpeg', alt:'子どもが絵を描く場面を描いた作品'},
+  {id:'WORK 03', src:'assets/work03.jpeg', alt:'海や子どもの情景を組み合わせたカラフルな作品'},
+  {id:'WORK 04', src:'assets/work04.jpeg', alt:'複数の表情を持つ小さな立体作品'},
+  {id:'WORK 05', src:'assets/work05.jpeg', alt:'カラフルな顔の立体作品'}
+];
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalTitle = document.getElementById('modalTitle');
+const closeBtn = document.getElementById('closeBtn');
+const grid = document.getElementById('worksGrid');
+
+function openWork(i){
+  const w=works[i]; modalImg.src=w.src; modalImg.alt=w.alt; modalTitle.textContent=w.id;
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; closeBtn.focus();
+}
+function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+
+document.querySelectorAll('.hotspot').forEach(btn=>btn.addEventListener('click',()=>openWork(+btn.dataset.work)));
+works.forEach((w,i)=>{
+  const b=document.createElement('button'); b.className='card'; b.type='button';
+  b.innerHTML=`<div class="thumb"><img src="${w.src}" alt="${w.alt}"></div><div class="meta"><strong>${w.id}</strong><span>View artwork →</span></div>`;
+  b.addEventListener('click',()=>openWork(i)); grid.appendChild(b);
+});
+closeBtn.addEventListener('click',closeModal); modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
+</script>
+</body>
+</html>
