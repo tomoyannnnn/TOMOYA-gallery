@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>TOMOYA Gallery | TOMOYA & 岳流</title>
+  <title>TAKERU＆TOMOYA GALLERY | 作品展示</title>
   <style>
     :root{--bg:#111;--fg:#f7f4ee;--muted:#b8b2a9;--panel:#181818;--accent:#fff}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}
@@ -50,12 +50,13 @@
     .wall-nav a:hover{background:#e9e4de}
     @media(max-width:800px){.sketch-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px}.wall{margin-bottom:80px}}
     @media(max-width:440px){.sketch-section{padding:60px 18px}.sketch-frame{border-width:7px}.sketch-grid{gap:36px 16px}.wall-heading{margin-bottom:34px}}
+  .brand{white-space:nowrap}.brand-amp{font-size:.72em;font-weight:400}.three-d-entry{max-width:640px;margin:32px auto 35px;padding:28px 24px 30px;border:1px solid #b8b1a4;background:linear-gradient(145deg,#f7f4ee,#eae5db);color:#292822;text-align:center;box-shadow:0 12px 35px #00000012}.entry-kicker{display:block;font:11px Georgia,serif;letter-spacing:.22em;color:#756f66}.three-d-entry h3{font-size:clamp(21px,3vw,29px);font-weight:400;letter-spacing:.09em;margin:12px 0}.three-d-entry p{font-size:13px;line-height:1.9;color:#555047;margin:8px 0 20px}.three-d-link{display:inline-flex;align-items:center;justify-content:center;gap:22px;min-height:48px;padding:11px 23px;background:#33332e;color:#fff;text-decoration:none;font-size:13px;letter-spacing:.08em;border:1px solid #33332e;transition:background .2s}.three-d-link:hover,.three-d-link:focus-visible{background:#625b50;color:#fff}@media(max-width:650px){.brand{font-size:clamp(14px,4.3vw,22px)!important}.three-d-entry{padding:24px 16px}.three-d-link{width:100%}}
   </style>
 </head>
 <body>
 <header>
-  <div class="brand">TOMOYA<small>GALLERY</small></div>
-  <nav><a href="#gallery">TOMOYA GALLERY</a><a href="#works">WORKS</a><a href="#sketch">岳流 SKETCH</a></nav>
+  <div class="brand">TAKERU <span class="brand-amp">＆</span> TOMOYA<small>GALLERY</small></div>
+  <nav><a href="#gallery">HOME</a><a href="#works">WORKS</a><a href="#sketch">岳流 SKETCH</a></nav>
 </header>
 
 <main>
@@ -78,6 +79,7 @@
   </section>
   <section class="sketch-section" id="sketch" aria-label="岳流のスケッチ展示">
     <div class="sketch-intro"><div class="sketch-eyebrow">GAKURYU / SKETCH EXHIBITION</div><h2>岳流のスケッチ</h2><p>16点の作品を、4つの展示壁面に分けてご覧いただけます。<br>作品を選ぶと拡大表示します。</p>
+      <div class="three-d-entry"><span class="entry-kicker">VIRTUAL EXHIBITION</span><h3>岳流の3D展示室</h3><p>4つの壁面を見回しながら、16点のスケッチを鑑賞できます。</p><a class="three-d-link" href="sketch-3d-motif-rotation-fixed.html">3D展示室に入る <span aria-hidden="true">→</span></a></div>
       <div class="wall-nav"><a href="#wall1">壁面 1</a><a href="#wall2">壁面 2</a><a href="#wall3">壁面 3</a><a href="#wall4">壁面 4</a></div>
     </div>
     <div id="sketchWalls"></div>
@@ -95,7 +97,7 @@
   </div>
 </div>
 
-<footer>TOMOYA GALLERY / 2026</footer>
+<footer>TAKERU＆TOMOYA GALLERY / 2026</footer>
 
 <script>
 const works = [
