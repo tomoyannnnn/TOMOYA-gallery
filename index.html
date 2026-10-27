@@ -203,6 +203,28 @@
 .site-navigation .gallery-dropdown a span{display:block;font-size:10px;color:#bcb4aa}
 .site-navigation .nav-links>a:hover,.site-navigation summary:hover{color:#fff!important}
 @media(max-width:780px){.gallery-stage>.site-navigation{grid-template-columns:1fr;gap:6px;min-height:88px;padding:8px 8px!important}.site-navigation .site-name{text-align:center;font-size:12px!important}.site-navigation .nav-links{gap:0}.site-navigation .nav-links>a,.site-navigation .nav-links>details{font-size:clamp(8px,1.7vw,12px)!important;min-height:35px!important;letter-spacing:0!important}.site-navigation .gallery-dropdown{left:-30px!important}.gallery-stage{margin-top:0!important}}
+
+/* 2026-10-28 title refinement: completely cover old image-embedded ART WORKS. */
+.gallery-stage::before{
+ content:"";position:absolute;z-index:110;top:0;left:0;right:0;
+ height:17%;background:linear-gradient(90deg,#161310 0%,#151210 30%,#0b0a09 100%);
+ pointer-events:none;
+}
+.gallery-stage > nav.image-nav.new-top-nav{
+ background:transparent!important;height:12.5%!important;min-height:58px!important;
+}
+.gallery-stage > nav.new-top-nav > .site-name{
+ font-family:"Segoe Script","Brush Script MT","URW Chancery L",cursive!important;
+ font-weight:400!important;font-style:italic!important;
+ font-size:clamp(16px,1.7vw,26px)!important;
+ letter-spacing:.025em!important;text-transform:none!important;
+}
+@media(max-width:900px){
+ .gallery-stage::before{height:22%}
+ .gallery-stage > nav.new-top-nav > .site-name{
+ font-size:clamp(15px,3.5vw,22px)!important;
+ }
+}
 </style>
 </head>
 <body>
