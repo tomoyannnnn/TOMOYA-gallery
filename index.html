@@ -119,6 +119,71 @@
 .gallery-stage > nav.image-nav .gallery-dropdown{top:100%!important;left:-45px!important;width:min(280px,85vw)!important}
 .gallery-stage{margin-top:0!important}
 }
+
+/* 2026-10-28: real navigation overlay; hides rasterized logo and fixed HOME underline */
+.gallery-stage > nav.image-nav.new-top-nav{
+  position:absolute!important;top:0!important;left:0!important;right:0!important;
+  width:100%!important;height:12.5%!important;min-height:58px!important;
+  z-index:120!important;display:flex!important;align-items:center!important;
+  justify-content:flex-end!important;gap:clamp(12px,2.6vw,44px)!important;
+  padding:0 clamp(15px,2.8vw,48px)!important;
+  background:linear-gradient(90deg,#141211 0%,#141211 35%,#0b0b0b 100%)!important;
+  pointer-events:auto!important;
+}
+.gallery-stage > nav.new-top-nav > .site-name{
+  display:block!important;position:relative!important;left:auto!important;top:auto!important;
+  width:auto!important;height:auto!important;flex:0 0 auto!important;margin-right:auto!important;
+  color:#f3f0eb!important;font-family:Arial,"Yu Gothic",sans-serif!important;
+  font-weight:600!important;letter-spacing:.08em!important;
+  font-size:clamp(12px,1.25vw,19px)!important;white-space:nowrap!important;
+  padding:8px 0!important;
+}
+.gallery-stage > nav.new-top-nav > a:not(.site-name),
+.gallery-stage > nav.new-top-nav > details{
+  position:relative!important;left:auto!important;top:auto!important;
+  width:auto!important;height:auto!important;padding:10px 0!important;
+  font-size:clamp(10px,1vw,15px)!important;color:#eee!important;
+  letter-spacing:.09em!important;white-space:nowrap!important;
+}
+.gallery-stage > nav.new-top-nav > details > summary{
+  position:relative!important;inset:auto!important;width:auto!important;height:auto!important;
+  padding:0 14px 0 0!important;color:#eee!important;
+  font-size:clamp(10px,1vw,15px)!important;letter-spacing:.09em!important;
+}
+.gallery-stage > nav.new-top-nav > details > summary::after{
+  content:"⌄"!important;position:absolute!important;right:0!important;top:-2px!important;
+  font-size:15px!important;color:#eee!important;
+}
+.gallery-stage > nav.new-top-nav > a:not(.site-name)::after,
+.gallery-stage > nav.new-top-nav > details::after{
+  content:"";position:absolute;bottom:3px;left:0;width:100%;height:2px;
+  background:#f5f2ed;opacity:0;transform:scaleX(.6);transition:opacity .2s,transform .2s;
+  pointer-events:none;
+}
+.gallery-stage > nav.new-top-nav > a.is-active::after,
+.gallery-stage > nav.new-top-nav > details.is-active::after{
+  opacity:1;transform:scaleX(1);
+}
+.gallery-stage > nav.new-top-nav .gallery-dropdown{
+  top:calc(100% + 12px)!important;left:0!important;
+  width:min(310px,86vw)!important;z-index:300!important;
+}
+.gallery-stage > nav.new-top-nav .gallery-dropdown a{
+  font-size:13px!important;color:#fff!important;
+}
+@media(max-width:900px){
+ .gallery-stage > nav.image-nav.new-top-nav{
+  height:auto!important;min-height:0!important;flex-wrap:wrap!important;
+  justify-content:center!important;gap:4px 15px!important;padding:10px 12px!important;
+ }
+ .gallery-stage > nav.new-top-nav > .site-name{
+  width:100%!important;text-align:center!important;margin:0!important;font-size:13px!important;
+ }
+ .gallery-stage > nav.new-top-nav > a:not(.site-name),
+ .gallery-stage > nav.new-top-nav > details,
+ .gallery-stage > nav.new-top-nav > details > summary{font-size:11px!important}
+ .gallery-stage > nav.new-top-nav .gallery-dropdown{left:-55px!important}
+}
 </style>
 </head>
 <body>
@@ -127,7 +192,7 @@
 <main>
   <section class="hero" id="gallery" aria-label="オンライン展示室">
     <div class="gallery-stage">
-      <nav class="image-nav" aria-label="メインメニュー">
+      <nav class="image-nav new-top-nav" aria-label="メインメニュー"><a class="site-name" href="#gallery">TAKERU &amp; TOMOYA GALLERY</a>
         <a class="nav-home" href="#gallery" aria-label="HOME">HOME</a>
         <details class="nav-gallery gallery-menu" id="galleryMenu">
           <summary aria-label="GALLERY 展示室を選択">GALLERY</summary>
@@ -240,6 +305,33 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.con
   galleryMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{galleryMenu.open=false;}));
   document.addEventListener('click',e=>{if(!galleryMenu.contains(e.target))galleryMenu.open=false;});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')galleryMenu.open=false;});
+
+  // Move the underline to the selected menu item.
+  const topNav=document.querySelector('.new-top-nav');
+  const topItems=[...topNav.querySelectorAll(':scope > a:not(.site-name), :scope > details')];
+  function activateTop(item){
+    topItems.forEach(el=>{el.classList.toggle('is-active',el===item);
+      if(el.tagName==='A'){el.setAttribute('aria-current',el===item?'page':'false');}
+    });
+  }
+  const homeItem=topNav.querySelector('.nav-home');
+  const galleryItem=topNav.querySelector('.nav-gallery');
+  activateTop(homeItem);
+  topItems.forEach(item=>{
+    if(item.tagName==='A')item.addEventListener('click',()=>activateTop(item));
+  });
+  galleryItem.querySelector('summary').addEventListener('click',()=>activateTop(galleryItem));
+  galleryItem.querySelectorAll('.gallery-dropdown a').forEach(a=>a.addEventListener('click',()=>activateTop(galleryItem)));
+  function syncTopFromHash(){
+    const h=location.hash;
+    if(h==='#works'||h==='#sketch')activateTop(galleryItem);
+    else if(h==='#about'||h==='#shop'||h==='#exhibition'||h==='#contact'){
+      const target=topNav.querySelector(`a[href="${h}"]`);
+      if(target)activateTop(target);
+    }else if(h==='#gallery'||!h)activateTop(homeItem);
+  }
+  window.addEventListener('hashchange',syncTopFromHash);
+  syncTopFromHash();
 </script>
 </body>
 </html>
