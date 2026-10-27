@@ -94,7 +94,32 @@
     .works[hidden]{display:none!important}
     .gallery-stage > nav.image-nav{top:9.5%!important}
     @media(max-width:700px){.gallery-stage > nav.image-nav{top:9.5%!important}}
-  </style>
+  
+/* FINAL: use the navigation already drawn in gallery.png, without a second bar. */
+.gallery-stage > nav.image-nav{position:absolute!important;z-index:90!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:12%!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;background:transparent!important;overflow:visible!important;pointer-events:none!important}
+.gallery-stage > nav.image-nav > a,.gallery-stage > nav.image-nav > details{position:absolute!important;top:0!important;height:100%!important;width:auto!important;display:block!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;pointer-events:auto!important;color:transparent!important;font-size:0!important}
+.gallery-stage > nav.image-nav > .nav-home{left:39%!important;width:7%!important}
+.gallery-stage > nav.image-nav > .nav-gallery{left:46.5%!important;width:9%!important}
+.gallery-stage > nav.image-nav > .nav-about{left:56.5%!important;width:8%!important}
+.gallery-stage > nav.image-nav > .nav-shop{left:65%!important;width:7%!important}
+.gallery-stage > nav.image-nav > .nav-exhibition{left:72.5%!important;width:12%!important}
+.gallery-stage > nav.image-nav > .nav-contact{left:84%!important;width:10%!important}
+.gallery-stage > nav.image-nav > .nav-gallery > summary{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;padding:0!important;background:transparent!important;color:transparent!important;font-size:0!important;cursor:pointer!important;list-style:none!important}
+.gallery-stage > nav.image-nav > .nav-gallery > summary::after{content:none!important}
+.gallery-stage > nav.image-nav .gallery-dropdown{position:absolute!important;top:100%!important;left:0!important;display:block!important;width:280px!important;padding:8px!important;background:#242320!important;border:1px solid #655c52!important;border-radius:4px!important;box-shadow:0 12px 28px #000a!important;z-index:200!important;pointer-events:auto!important}
+.gallery-stage > nav.image-nav .gallery-dropdown a{position:static!important;display:block!important;color:white!important;font-size:13px!important;padding:12px!important;width:auto!important;height:auto!important;line-height:1.5!important;pointer-events:auto!important}
+.gallery-stage > nav.image-nav .gallery-dropdown a span{display:block;color:#c5bdb1;font-size:10px}
+.gallery-stage > nav.image-nav .gallery-dropdown a:hover{background:#494239}
+.gallery-stage > nav.image-nav a:focus-visible,.gallery-stage > nav.image-nav summary:focus-visible{outline:2px solid #e2d1b3!important;outline-offset:-2px}
+/* On narrow screens, the baked-in labels are too small; show one compact functional bar. */
+@media(max-width:700px){
+.gallery-stage > nav.image-nav{top:0!important;height:auto!important;min-height:42px!important;background:#0d0c0b!important;display:flex!important;align-items:center!important;justify-content:space-around!important;gap:0!important;pointer-events:auto!important}
+.gallery-stage > nav.image-nav > a,.gallery-stage > nav.image-nav > details{position:relative!important;left:auto!important;top:auto!important;width:auto!important;height:42px!important;color:#fff!important;font-size:10px!important;padding:14px 3px!important}
+.gallery-stage > nav.image-nav > .nav-gallery > summary{position:relative!important;inset:auto!important;color:#fff!important;font-size:10px!important;padding:0!important;width:auto!important;height:auto!important}
+.gallery-stage > nav.image-nav .gallery-dropdown{top:100%!important;left:-45px!important;width:min(280px,85vw)!important}
+.gallery-stage{margin-top:0!important}
+}
+</style>
 </head>
 <body>
 
