@@ -184,6 +184,25 @@
  .gallery-stage > nav.new-top-nav > details > summary{font-size:11px!important}
  .gallery-stage > nav.new-top-nav .gallery-dropdown{left:-55px!important}
 }
+
+/* Unified six-item navigation */
+.gallery-stage{overflow:visible!important}
+.gallery-stage>img{display:block;width:100%;height:100%;object-fit:cover}
+.gallery-stage>.site-navigation{position:absolute!important;inset:0 0 auto 0!important;z-index:200!important;min-height:76px;display:grid!important;grid-template-columns:minmax(180px,1.7fr) minmax(0,4.5fr);align-items:center;gap:16px;padding:12px clamp(18px,2.5vw,40px)!important;background:#11100f!important;color:#f6f3ef!important;box-sizing:border-box}
+.site-navigation .site-name{display:block!important;position:static!important;color:#f6f3ef!important;font:600 clamp(13px,1.2vw,19px)/1.35 Arial,'Yu Gothic',sans-serif!important;letter-spacing:.04em!important;white-space:normal;text-decoration:none}
+.site-navigation .nav-links{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center;gap:3px}
+.site-navigation .nav-links>a,.site-navigation .nav-links>details{display:flex!important;position:relative!important;inset:auto!important;align-items:center;justify-content:center;min-width:0!important;width:auto!important;height:auto!important;min-height:45px!important;margin:0!important;padding:8px 3px!important;flex:none!important;background:none!important;border:0!important;box-sizing:border-box;white-space:nowrap;color:#eae6e0!important;font:400 clamp(10px,.95vw,15px)/1.4 Arial,sans-serif!important;letter-spacing:.06em;text-decoration:none;cursor:pointer;pointer-events:auto!important}
+.site-navigation .nav-links>details>summary{position:static!important;display:flex!important;align-items:center;justify-content:center;width:100%!important;height:100%!important;padding:0!important;list-style:none!important;color:#eae6e0!important;font:inherit!important;cursor:pointer}
+.site-navigation .nav-links>details>summary::-webkit-details-marker{display:none}
+.site-navigation .nav-links>details>summary::after{content:'⌄';margin-left:5px;font-size:15px;line-height:1}
+.site-navigation .nav-links>a::after,.site-navigation .nav-links>details::after{content:''!important;position:absolute!important;left:12%!important;right:12%!important;bottom:1px!important;width:auto!important;height:2px!important;background:#fff!important;opacity:0!important;transform:none!important}
+.site-navigation .nav-links>.is-active::after,.site-navigation .nav-links>details[open]::after{opacity:1!important}
+.site-navigation .gallery-dropdown{position:absolute!important;top:calc(100% + 5px)!important;left:0!important;width:min(310px,85vw)!important;padding:8px!important;background:#22211f!important;border:1px solid #655d54!important;border-radius:4px!important;box-shadow:0 12px 30px #000a!important;z-index:400!important;display:block!important}
+.site-navigation .gallery-dropdown a{display:block!important;position:static!important;width:auto!important;height:auto!important;padding:12px 14px!important;font-size:13px!important;line-height:1.4!important;color:#fff!important;text-decoration:none!important;white-space:normal!important}
+.site-navigation .gallery-dropdown a:hover{background:#403c36!important}
+.site-navigation .gallery-dropdown a span{display:block;font-size:10px;color:#bcb4aa}
+.site-navigation .nav-links>a:hover,.site-navigation summary:hover{color:#fff!important}
+@media(max-width:780px){.gallery-stage>.site-navigation{grid-template-columns:1fr;gap:6px;min-height:88px;padding:8px 8px!important}.site-navigation .site-name{text-align:center;font-size:12px!important}.site-navigation .nav-links{gap:0}.site-navigation .nav-links>a,.site-navigation .nav-links>details{font-size:clamp(8px,1.7vw,12px)!important;min-height:35px!important;letter-spacing:0!important}.site-navigation .gallery-dropdown{left:-30px!important}.gallery-stage{margin-top:0!important}}
 </style>
 </head>
 <body>
@@ -192,22 +211,21 @@
 <main>
   <section class="hero" id="gallery" aria-label="オンライン展示室">
     <div class="gallery-stage">
-      <nav class="image-nav new-top-nav" aria-label="メインメニュー"><a class="site-name" href="#gallery">TAKERU &amp; TOMOYA GALLERY</a>
-        <a class="nav-home" href="#gallery" aria-label="HOME">HOME</a>
-        <details class="nav-gallery gallery-menu" id="galleryMenu">
-          <summary aria-label="GALLERY 展示室を選択">GALLERY</summary>
-          <div class="gallery-dropdown">
-            <a href="#works" onclick="document.getElementById('works').hidden=false">朋也の作品展示 <span>TOMOYA / WORKS</span></a>
-            <a href="#sketch">岳流のスケッチ <span>TAKERU / SKETCH</span></a>
-            <a href="sketch-3d-motif-rotation-fixed.html">岳流の3D展示室 <span>3D EXHIBITION</span></a>
-            <a href="digital-gallery.html">岳流のデジタルアート <span>DIGITAL ART</span></a>
-          </div>
-        </details>
-        <a class="nav-about" href="#about" aria-label="ABOUT">ABOUT</a>
-        <a class="nav-shop" href="#shop" aria-label="SHOP">SHOP</a>
-        <a class="nav-exhibition" href="#exhibition" aria-label="EXHIBITION">EXHIBITION</a>
-        <a class="nav-contact" href="#contact" aria-label="CONTACT">CONTACT</a>
-      </nav>
+      <nav class="site-navigation" aria-label="メインメニュー">
+<a class="site-name" href="index.html">TAKERU &amp; TOMOYA GALLERY</a>
+<div class="nav-links">
+<a class="nav-home is-active" href="index.html">HOME</a>
+<details class="nav-gallery"><summary>GALLERY</summary><div class="gallery-dropdown">
+<a href="index.html#works">朋也の作品展示 <span>TOMOYA / WORKS</span></a>
+<a href="index.html#sketch">岳流のスケッチ <span>TAKERU / SKETCH</span></a>
+<a href="sketch-3d-motif-rotation-fixed.html">岳流の3D展示室 <span>3D EXHIBITION</span></a>
+<a href="digital-gallery.html">岳流のデジタルアート <span>DIGITAL ART</span></a>
+</div></details>
+<a class="nav-about" href="about.html">ABOUT</a>
+<a class="nav-shop" href="shop.html">SHOP</a>
+<a class="nav-exhibition" href="exhibition.html">EXHIBITION</a>
+<a class="nav-contact" href="contact.html">CONTACT</a>
+</div></nav>
 
       <img src="gallery.png" alt="オンラインギャラリー展示室" />
       <button class="hotspot h1" data-work="0" aria-label="WORK 01 を開く"></button>
@@ -231,12 +249,7 @@
     <div id="sketchWalls"></div>
   </section>
 
-  <section class="future-links" style="padding:45px 20px 65px;max-width:900px;margin:auto;color:#d7d0c6;font-size:14px;line-height:1.9">
-    <div id="about" style="scroll-margin-top:25px"><h2>ABOUT</h2><p>TAKERU＆TOMOYA GALLERY — 岳流と朋也の作品をご紹介しています。</p></div>
-    <div id="shop" style="scroll-margin-top:25px"><h2>SHOP</h2><p>岳流のデジタル作品は、デジタル展示室でキャンバスのサイズと価格をご覧いただけます。オンライン決済は準備中です。 <a href="digital-gallery.html" style="text-decoration:underline">デジタル展示室を見る</a></p></div>
-    <div id="exhibition" style="scroll-margin-top:25px"><h2>EXHIBITION</h2><p>展示会のご案内は準備中です。</p></div>
-    <div id="contact" style="scroll-margin-top:25px"><h2>CONTACT</h2><p>お問い合わせ先のご案内は準備中です。</p></div>
-  </section>
+  
 </main>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="作品詳細">
@@ -306,32 +319,12 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.con
   document.addEventListener('click',e=>{if(!galleryMenu.contains(e.target))galleryMenu.open=false;});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')galleryMenu.open=false;});
 
-  // Move the underline to the selected menu item.
-  const topNav=document.querySelector('.new-top-nav');
-  const topItems=[...topNav.querySelectorAll(':scope > a:not(.site-name), :scope > details')];
-  function activateTop(item){
-    topItems.forEach(el=>{el.classList.toggle('is-active',el===item);
-      if(el.tagName==='A'){el.setAttribute('aria-current',el===item?'page':'false');}
-    });
-  }
-  const homeItem=topNav.querySelector('.nav-home');
-  const galleryItem=topNav.querySelector('.nav-gallery');
-  activateTop(homeItem);
-  topItems.forEach(item=>{
-    if(item.tagName==='A')item.addEventListener('click',()=>activateTop(item));
-  });
-  galleryItem.querySelector('summary').addEventListener('click',()=>activateTop(galleryItem));
-  galleryItem.querySelectorAll('.gallery-dropdown a').forEach(a=>a.addEventListener('click',()=>activateTop(galleryItem)));
-  function syncTopFromHash(){
-    const h=location.hash;
-    if(h==='#works'||h==='#sketch')activateTop(galleryItem);
-    else if(h==='#about'||h==='#shop'||h==='#exhibition'||h==='#contact'){
-      const target=topNav.querySelector(`a[href="${h}"]`);
-      if(target)activateTop(target);
-    }else if(h==='#gallery'||!h)activateTop(homeItem);
-  }
-  window.addEventListener('hashchange',syncTopFromHash);
-  syncTopFromHash();
+// Gallery submenu and current section state.
+const galleryMenu=document.querySelector('.site-navigation .nav-gallery');
+const homeTab=document.querySelector('.site-navigation .nav-home');
+function syncHomeNav(){const gallerySelected=['#works','#sketch'].includes(location.hash);galleryMenu.classList.toggle('is-active',gallerySelected);homeTab.classList.toggle('is-active',!gallerySelected);if(location.hash==='#works'){const w=document.getElementById('works');if(w)w.hidden=false;}}
+window.addEventListener('hashchange',syncHomeNav);syncHomeNav();
+document.addEventListener('click',e=>{if(galleryMenu.open&&!galleryMenu.contains(e.target))galleryMenu.open=false;});
 </script>
 </body>
 </html>
