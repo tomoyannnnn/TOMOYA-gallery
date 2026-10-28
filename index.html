@@ -234,6 +234,20 @@
  .site-navigation .nav-links>a,.site-navigation .nav-links>details{min-height:32px!important;font-size:clamp(8px,1.7vw,11px)!important}
  .gallery-stage>img{top:83px!important;height:calc(100% - 83px)!important}
 }
+
+/* Smartphone layout: keep the original gallery artwork visible below a compact menu. */
+@media (max-width:800px){
+  .hero{display:block!important;min-height:0!important;padding:0!important}
+  .gallery-stage{width:100%!important;height:auto!important;aspect-ratio:auto!important;overflow:visible!important;box-shadow:none!important;background:#111!important}
+  .gallery-stage>.site-navigation{position:relative!important;inset:auto!important;height:auto!important;min-height:0!important;display:grid!important;grid-template-columns:1fr!important;gap:5px!important;padding:10px 7px 7px!important;background:#11100f!important}
+  .site-navigation .site-name{font-size:clamp(15px,4vw,21px)!important;text-align:center!important;white-space:normal!important}
+  .site-navigation .nav-links{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:0!important}
+  .site-navigation .nav-links>a,.site-navigation .nav-links>details{min-height:35px!important;padding:5px 1px!important;font-size:clamp(8px,2vw,11px)!important;letter-spacing:0!important}
+  .gallery-stage>img{position:relative!important;left:auto!important;top:auto!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;clip-path:inset(10% 0 0 0);margin-top:-6.6667vw!important}
+  .gallery-stage>.hotspot{transform:none!important}
+  .gallery-stage>.h1{top:calc(74px + 9vw)!important}
+  .gallery-stage>.hint{bottom:12px!important;font-size:9px!important;max-width:90%;text-align:center}
+}
 </style>
 </head>
 <body>
@@ -344,18 +358,26 @@ works.forEach((w,i)=>{
 closeBtn.addEventListener('click',closeModal); modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
 
-  // Close menu when a gallery is chosen or the user clicks outside.
-  const galleryMenu=document.getElementById('galleryMenu');
-  galleryMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{galleryMenu.open=false;}));
-  document.addEventListener('click',e=>{if(!galleryMenu.contains(e.target))galleryMenu.open=false;});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')galleryMenu.open=false;});
-
 // Gallery submenu and current section state.
 const galleryMenu=document.querySelector('.site-navigation .nav-gallery');
 const homeTab=document.querySelector('.site-navigation .nav-home');
 function syncHomeNav(){const gallerySelected=['#works','#sketch'].includes(location.hash);galleryMenu.classList.toggle('is-active',gallerySelected);homeTab.classList.toggle('is-active',!gallerySelected);if(location.hash==='#works'){const w=document.getElementById('works');if(w)w.hidden=false;}}
 window.addEventListener('hashchange',syncHomeNav);syncHomeNav();
 document.addEventListener('click',e=>{if(galleryMenu.open&&!galleryMenu.contains(e.target))galleryMenu.open=false;});
+
+// Keep clickable artwork regions aligned with the original gallery image on phones.
+function alignMobileHotspots(){
+ const stage=document.querySelector('.gallery-stage'),img=stage?.querySelector(':scope > img');
+ if(!stage||!img)return;
+ const hotspots=stage.querySelectorAll('.hotspot');
+ if(window.innerWidth>800){hotspots.forEach(el=>{el.style.removeProperty('top');el.style.removeProperty('height');el.style.removeProperty('left');el.style.removeProperty('width')});return;}
+ const stageRect=stage.getBoundingClientRect(),r=img.getBoundingClientRect();
+ const regions=[[.171,.155,.152,.435],[.352,.321,.142,.274],[.511,.273,.243,.357],[.758,.423,.091,.222],[.863,.422,.085,.240]];
+ hotspots.forEach((el,i)=>{const [x,y,w,h]=regions[i];el.style.left=(r.left-stageRect.left+x*r.width)+'px';el.style.top=(r.top-stageRect.top+y*r.height)+'px';el.style.width=(w*r.width)+'px';el.style.height=(h*r.height)+'px';});
+}
+window.addEventListener('resize',alignMobileHotspots);
+window.addEventListener('load',alignMobileHotspots);
+alignMobileHotspots();
 </script>
 </body>
 </html>
