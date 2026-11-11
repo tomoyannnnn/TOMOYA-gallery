@@ -23,10 +23,10 @@
 </head>
 <body>
 <header><a class="brand" href="index.html">TAKERU＆TOMOYA <span>GALLERY</span></a><a class="back" href="index.html#sketch">← 既存のスケッチ展示に戻る</a></header>
-<main><div class="eyebrow">GAKURYU / VIRTUAL EXHIBITION</div><h1>岳流のスケッチ</h1><p class="sub">16点をモチーフの近い作品同士で4つの壁面に展示しています。作品画像は加工していません。</p>
+<main><div class="eyebrow">TAKERU / VIRTUAL EXHIBITION</div><h1>岳流のスケッチ</h1><p class="sub">16点をモチーフの近い作品同士で4つの壁面に展示しています。作品画像は加工していません。</p>
 <div class="viewport" id="viewport" aria-label="3D展示室。左右のボタンまたはスワイプで壁面を切り替えられます"><div class="world" id="world"><div class="room" id="room"><div class="surface floor"></div><div class="surface ceiling"></div></div></div><div class="corner-vignette"></div><div class="hud"><strong id="wallLabel">WALL 01 / 壁面 1</strong><div>作品をクリックして拡大<br>左右にドラッグして見回す</div></div><div class="loading" id="loading">画像を読み込み中…</div></div>
 <div class="controls"><button type="button" id="left" aria-label="左の壁面を見る">← 左を見る</button><button type="button" class="primary" id="front" aria-label="正面の壁を見る">正面を見る</button><button type="button" id="right" aria-label="右の壁面を見る">右を見る →</button></div>
-<div class="wall-pills" id="wallPills" aria-label="壁面を選択"><button data-go="0" class="active">壁面1・動物</button><button data-go="1">壁面2・動物ほか</button><button data-go="2">壁面3・風景</button><button data-go="3">壁面4・人物ほか</button></div><p class="help">パソコン：左右ボタン・← → キー・ドラッグ　／　スマートフォン：左右スワイプ<br>既存の展示ページは変更していません。</p><div class="fallback" id="fallback">画像が表示されない場合は、GitHubに <code>sketch_images/scan-84.jpg</code> ～ <code>scan-99.jpg</code> があるか確認してください。</div><footer>TAKERU＆TOMOYA GALLERY · GAKURYU SKETCHES · REFINED</footer></main>
+<div class="wall-pills" id="wallPills" aria-label="壁面を選択"><button data-go="0" class="active">壁面1・動物</button><button data-go="1">壁面2・動物ほか</button><button data-go="2">壁面3・風景</button><button data-go="3">壁面4・人物ほか</button></div><p class="help">パソコン：左右ボタン・← → キー・ドラッグ　／　スマートフォン：左右スワイプ<br>既存の展示ページは変更していません。</p><div class="fallback" id="fallback">画像が表示されない場合は、GitHubに <code>sketch_images/scan-84.jpg</code> ～ <code>scan-99.jpg</code> があるか確認してください。</div><footer>TAKERU＆TOMOYA GALLERY · TAKERU SKETCHES · REFINED</footer></main>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="作品拡大表示" aria-hidden="true"><div class="modal-panel"><button class="close" id="close" aria-label="閉じる">×</button><img id="detailImage" alt=""><div class="modal-bottom"><div><strong>無題</strong><small id="detailCaption"></small></div><span>岳流 / A4</span></div></div></div>
 <script>
 (()=>{
