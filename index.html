@@ -248,6 +248,17 @@
   .gallery-stage>.h1{top:calc(74px + 9vw)!important}
   .gallery-stage>.hint{bottom:12px!important;font-size:9px!important;max-width:90%;text-align:center}
 }
+
+/* Exhibition entrance cards: below the existing homepage gallery. */
+.exhibition-entrances{background:#151515;padding:56px 24px 80px;color:#f7f4ee}
+.entrances-inner{max-width:1060px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.entrance-card{display:block;padding:38px 34px;border:1px solid #655e55;background:#211f1d;text-decoration:none;color:inherit;transition:background .2s,border-color .2s}
+.entrance-card:hover,.entrance-card:focus-visible{background:#302c28;border-color:#c8b9a6}
+.entrance-label{font:11px Georgia,serif;letter-spacing:.19em;color:#c7b7a2}
+.entrance-card h2{font-size:clamp(20px,2.5vw,29px);font-weight:400;margin:16px 0 12px}
+.entrance-card p{font-size:13px;line-height:1.9;color:#c5c0b8;margin:0 0 26px}
+.entrance-go{font-size:13px;letter-spacing:.07em;border-bottom:1px solid #c7b7a2;padding-bottom:5px}
+@media(max-width:700px){.exhibition-entrances{padding:30px 18px 54px}.entrances-inner{grid-template-columns:1fr;gap:16px}.entrance-card{padding:26px 22px}}
 </style>
 </head>
 <body>
@@ -286,14 +297,22 @@
     <p>展示室に飾られている5点を、ここから個別に拡大できます。</p>
     <div class="grid" id="worksGrid"></div>
   </section>
-  <section class="sketch-section" id="sketch" aria-label="岳流のスケッチ展示">
-    <div class="sketch-intro"><div class="sketch-eyebrow">GAKURYU / SKETCH EXHIBITION</div><h2>岳流のスケッチ</h2><p>16点の作品を、4つの展示壁面に分けてご覧いただけます。<br>作品を選ぶと拡大表示します。</p>
-      <div class="wall-nav"><a href="#wall1">壁面 1</a><a href="#wall2">壁面 2</a><a href="#wall3">壁面 3</a><a href="#wall4">壁面 4</a></div>
+  <section class="exhibition-entrances" aria-label="岳流の展示室への入口">
+    <div class="entrances-inner">
+      <a class="entrance-card" href="sketch-3d-motif-rotation-fixed.html">
+        <span class="entrance-label">TAKERU / SKETCH</span>
+        <h2>3Dスケッチ展示室</h2>
+        <p>16点のスケッチを、4つの壁面で鑑賞する展示室</p>
+        <span class="entrance-go">展示室へ進む →</span>
+      </a>
+      <a class="entrance-card" href="digital-gallery.html">
+        <span class="entrance-label">TAKERU / DIGITAL ART</span>
+        <h2>デジタル作品展示室</h2>
+        <p>岳流のデジタル作品を鑑賞する展示室</p>
+        <span class="entrance-go">展示室へ進む →</span>
+      </a>
     </div>
-    <div id="sketchWalls"></div>
   </section>
-
-  
 </main>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="作品詳細">
@@ -317,25 +336,6 @@ const works = [
   {id:'WORK 04', src:'work04.jpeg', alt:'複数の表情を持つ小さな立体作品'},
   {id:'WORK 05', src:'work05.jpeg', alt:'カラフルな顔の立体作品'}
 ];
-const sketches = Array.from({length:16},(_,i)=>({
-  id:'無題', src:`sketch_images/scan-${84+i}.jpg`, alt:`岳流のスケッチ作品 ${String(i+1).padStart(2,'0')}`
-}));
-const sketchWalls = document.getElementById('sketchWalls');
-for(let wall=0;wall<4;wall++){
-  const section=document.createElement('section'); section.className='wall'; section.id=`wall${wall+1}`;
-  section.innerHTML=`<div class="wall-heading"><small>WALL ${String(wall+1).padStart(2,'0')}</small><h3>展示壁面 ${wall+1}</h3></div><div class="sketch-grid"></div>`;
-  const cards=section.querySelector('.sketch-grid');
-  sketches.slice(wall*4,wall*4+4).forEach((w,j)=>{
-    const btn=document.createElement('button');btn.className='sketch-card';btn.type='button';
-    const img=document.createElement('img');img.src=w.src;img.alt=w.alt;img.loading='lazy';
-    const frame=document.createElement('span');frame.className='sketch-frame';frame.appendChild(img);
-    const name=document.createElement('span');name.className='sketch-name';name.textContent='無題';
-    const info=document.createElement('span');info.className='sketch-info';info.textContent=`作品 ${String(wall*4+j+1).padStart(2,'0')}`;
-    btn.append(frame,name,info);btn.addEventListener('click',()=>openSketch(w));cards.appendChild(btn);
-  });
-  sketchWalls.appendChild(section);
-}
-function openSketch(w){modalImg.src=w.src;modalImg.alt=w.alt;modalTitle.textContent='無題 — '+w.alt;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';closeBtn.focus();}
 const modal = document.getElementById('modal');
 const modalImg = document.getElementById('modalImg');
 const modalTitle = document.getElementById('modalTitle');
@@ -360,7 +360,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.con
 // Gallery submenu and current section state.
 const galleryMenu=document.querySelector('.site-navigation .nav-gallery');
 const homeTab=document.querySelector('.site-navigation .nav-home');
-function syncHomeNav(){const gallerySelected=['#works','#sketch'].includes(location.hash);galleryMenu.classList.toggle('is-active',gallerySelected);homeTab.classList.toggle('is-active',!gallerySelected);if(location.hash==='#works'){const w=document.getElementById('works');if(w)w.hidden=false;}}
+function syncHomeNav(){const gallerySelected=['#works'].includes(location.hash);galleryMenu.classList.toggle('is-active',gallerySelected);homeTab.classList.toggle('is-active',!gallerySelected);if(location.hash==='#works'){const w=document.getElementById('works');if(w)w.hidden=false;}}
 window.addEventListener('hashchange',syncHomeNav);syncHomeNav();
 document.addEventListener('click',e=>{if(galleryMenu.open&&!galleryMenu.contains(e.target))galleryMenu.open=false;});
 
